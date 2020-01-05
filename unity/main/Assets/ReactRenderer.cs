@@ -1,47 +1,78 @@
-﻿using System.Collections;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using TypeLite;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Assets.Bridge;
 using Unity.UIElements.Runtime;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityNodejs;
 
-public class ReactRenderer : PanelRenderer
+namespace Assets
 {
-    // Start is called before the first frame update
-    private new void Start()
+    public class ReactRenderer : PanelRenderer
     {
-        base.Start();
+        public readonly Queue<string> messagesToHandle = new Queue<string>();
+        public readonly Queue<(string, string)> handlesToInvoke = new Queue<(string, string)>();
 
-        File.WriteAllText("test.txt", TypeScript.Definitions()
-            .For<VisualElement>().Generate());
+        private MessageHandler messageHandler;
+        private ReactScriptContext context;
+        private UIElementsEventSystem eventSystem;
 
-        //NodeJSRuntime.RegisterDebugCallback((string message) => Debug.Log(message));
-        //NodeJSRuntime.RegisterMessageCallback((string message) => Debug.Log(message));
-        //StartCoroutine(NodeIO());
-    }
+        public static ReactRenderer Current { get; private set; }
 
-    private new void OnDisable()
-    {
-        base.OnDisable();
-
-        //NodeJSRuntime.Dispose();
-    }
-
-    private static IEnumerator NodeIO()
-    {
-        NodeJSRuntime.RunScript(@"setInterval(function() { process.natives.log('stuff here', JSON.stringify({ a: 'b' })); }, 1000);");
-
-        var ret = 1;
-        while (ret != 0)
+        private new void Awake()
         {
-            ret = NodeJSRuntime.LoopOnce();
+            base.Awake();
 
-            yield return new WaitForEndOfFrame();
+            if (Current != null)
+            {
+                throw new Exception("It's possible to have only one react renderer instance in the game'");
+            }
+
+            Current = this;
         }
 
-        NodeJSRuntime.PrintReturnValue();
+        private new void Start()
+        {
+            base.Start();
+
+            var globals = new Globals();
+            this.messageHandler = new MessageHandler(this);
+            this.context = new ReactScriptContext();
+            this.eventSystem = GetComponent<UIElementsEventSystem>();
+
+            context.Run("Assets/js/main.js", this, globals);
+
+            StartCoroutine(HandleMessages());
+        }
+
+        private IEnumerator HandleMessages()
+        {
+            while (true)
+            {
+                if (messagesToHandle.Count > 0)
+                {
+                    this.enabled = false;
+                    this.eventSystem.enabled = false;
+
+                    yield return new WaitForFixedUpdate();
+
+                    var message = messagesToHandle.Dequeue();
+
+                    messageHandler.HandleMessage(message);
+
+                    this.enabled = true;
+                    this.eventSystem.enabled = true;
+                }
+
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        private new void OnDestroy()
+        {
+            base.OnDestroy();
+
+            StopAllCoroutines();
+            context.Dispose();
+        }
     }
 }

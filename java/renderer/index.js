@@ -12,9 +12,9 @@ const HostConfig = {
     prepareForCommit: () => {},
     resetAfterCommit: () => {},
     getChildHostContext: () => {},
-    shouldSetTextContent: () => {},
-    createTextInstance: () => {},
-    finalizeInitialChildren: () => {},
+    shouldSetTextContent: () => false,
+    createTextInstance: () => null,
+    finalizeInitialChildren: () => false,
     supportsMutation: true,
     createInstance(type, props) {
         switch (type) {

@@ -17,6 +17,9 @@ namespace UnityNodejs
         public static extern void RunScript(string script);
 
         [DllImport("unity-nodejs-runtime")]
+        public static extern void Evaluate(string script);
+
+        [DllImport("unity-nodejs-runtime")]
         public static extern int LoopOnce();
 
         [DllImport("unity-nodejs-runtime")]

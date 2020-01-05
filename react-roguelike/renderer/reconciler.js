@@ -6,14 +6,14 @@ const RenderSprite = require('./components/rendersprite');
 const Music = require('./components/music');
 
 const SDLRenderer = Reconciler({
-  now: Date.now,
-    getRootHostContext: (node) => {},
-    prepareForCommit: () => {},
-    resetAfterCommit: () => {},
-    getChildHostContext: () => {},
-    shouldSetTextContent: () => {},
-    createTextInstance: () => {},
-    finalizeInitialChildren: () => {},
+    now: Date.now,
+    getRootHostContext: (node) => { },
+    prepareForCommit: () => { },
+    resetAfterCommit: () => { },
+    getChildHostContext: () => { },
+    shouldSetTextContent: () => { },
+    createTextInstance: () => { },
+    finalizeInitialChildren: () => { },
     supportsMutation: true,
     createInstance(type, props) {
         if (type === 'window') return new Window(props);

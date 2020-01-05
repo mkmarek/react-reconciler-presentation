@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>Messing around with React</h1>
+        <p>Presentation about react reconciler</p>
+      </section>
+      <section>
+        <section>
+          <img src="images/reconciler.jpg" />
+        </section>
+        <section>
+          <h2>Basic renderer code structure</h2>
+          <pre><code class="js">const Reconciler = require('react-reconciler');
+
+const HostConfig = { /* some stuff here */ };	
+const MyRenderer = Reconciler(HostConfig);
+const RendererPublicAPI = {
+  render(element, container, callback) {
+    const node = MyRenderer.createContainer(container);
+    MyRenderer.updateContainer(element, node, callback);
+  }
+};
+  
+module.exports = RendererPublicAPI;</code></pre>
+        </section>
+        <section>
+          <h2>Share data between components</h2>
+          <pre><code class="js">const HostConfig = {
+  getRootHostContext: (nextRootInstance) => ({}),
+  getChildHostContext: (
+    parentContext, fiberType, rootInstance) => ({}),
+}</code></pre>
+        </section>
+        <section>
+            <pre><code class="js">const HostConfig = {
+  shouldSetTextContent: (type, props) => true (or false),
+}</code></pre>
+        </section>
+        <section>
+          <h2>In React-DOM</h2>
+        <pre><code class="js">function shouldSetTextContent(type, props) {
+  return (
+    type === 'textarea' ||
+    type === 'option' ||
+    type === 'noscript' ||
+    typeof props.children === 'string' ||
+    typeof props.children === 'number' ||
+    (typeof props.dangerouslySetInnerHTML === 'object' &&
+      props.dangerouslySetInnerHTML !== null &&
+      props.dangerouslySetInnerHTML.__html != null)
+  );
+}</code></pre>
+        </section>
+        <section>
+          <pre><code class="js">const HostConfig = {
+  prepareForCommit: (rootContainerInstance) => {},
+  resetAfterCommit: (rootContainerInstance) => {}
+}</code></pre>
+          </section>
+          <section>
+              <pre><code class="js">const HostConfig = {
+  finalizeInitialChildren: (instance,
+    type,
+    newProps,
+    rootContainerInstance,
+    currentHostContext) => {}
+}</code></pre>
+        </section>
+        <section>
+            <pre><code class="js">const HostConfig = {
+  createInstance(type, props) {
+  },
+  appendInitialChild(parent, child) {
+  },
+  appendChild(parent, child) {
+  },
+  appendChildToContainer(target, child) {
+  }
+}</code></pre>
+        </section>
+      </section>
+      <section>
+        
+      </section>
+    </div>
+  </div>
+
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true }
+      ]
+    });
+  </script>
+</body>
+
+</html>

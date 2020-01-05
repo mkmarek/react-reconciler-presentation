@@ -130,6 +130,8 @@ declare module JSX {
         userData?: any;
         viewDataKey?: string;
         visible?: boolean;
+        
+        onClick?: () => void;
     }
 
     type Key = string | number;
@@ -141,5 +143,14 @@ declare module JSX {
 
     interface IntrinsicElements {
         element: ElementProps;
+    }
+}
+
+declare module NodeJS {
+    interface Process {
+        natives: {
+            bridge: (payload: string) => void;
+            invokeCallback: (elementId: string, callback: string) => void;
+        }
     }
 }

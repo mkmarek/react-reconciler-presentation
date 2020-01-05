@@ -100,40 +100,69 @@ extern "C" {
 	}
 
 	int LoopOnce() {
-		return JX_LoopOnce();
+		try {
+			return JX_LoopOnce();
+		}
+		catch (...) {
+			gDebugCallback("Something went wrong.");
+		}
 	}
 
 	void PrintReturnValue() {
+		try {
 		std::string ret;
 		ConvertResult(&val, ret);
 
 		JX_Free(&val);
 
 		gDebugCallback(ret.c_str());
+		}
+		catch (...) {
+			gDebugCallback("Something went wrong.");
+		}
 	}
 
 	void Dispose() {
-		JX_StopEngine();
+		try {
+			JX_StopEngine();
+		}
+		catch (...) {
+			gDebugCallback("Something went wrong.");
+		}
+	}
+
+	void Evaluate(const char* script) {
+		try {
+			JX_Evaluate(script, "additional", &val);
+		}
+		catch (...) {
+			gDebugCallback("Something went wrong.");
+		}
 	}
 
 	void RunScript(const char* script)
 	{
-		if (initialized == false) {
-			JX_Initialize("", callback);
-			initialized = true;
+		try {
+			if (initialized == false) {
+				JX_Initialize("", callback);
+				initialized = true;
+			}
+
+			if (JX_GetThreadId() == -1) {
+				JX_InitializeNewEngine();
+			}
+
+			JX_DefineMainFile("console.log('hello')");
+			JX_DefineExtension("log", log);
+			JX_DefineExtension("bridge", bridge);
+			JX_StartEngine();
+
+			while (JX_LoopOnce() != 0) Sleep(1);
+
+			JX_Evaluate(script, "myscript", &val);
 		}
-
-		if (JX_GetThreadId() == -1) {
-			JX_InitializeNewEngine();
+		catch (...) {
+			gDebugCallback("Something went wrong.");
 		}
-
-		JX_DefineMainFile("console.log('Hello');");
-		JX_DefineExtension("log", log);
-		JX_DefineExtension("bridge", bridge);
-		JX_StartEngine();
-
-		while (JX_LoopOnce() != 0) Sleep(1);
-
-		JX_Evaluate(script, "myscript", &val);
 	}
 }
