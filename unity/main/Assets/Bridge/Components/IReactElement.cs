@@ -2,6 +2,6 @@
 {
     public interface IReactElement
     {
-        void UpdateProps(BirdgePayload.BridgeMessage.ComponentProps props);
+        void UpdateProps(BridgePayload.BridgeMessage.ComponentProps props);
     }
 }

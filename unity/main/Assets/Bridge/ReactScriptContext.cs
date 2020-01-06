@@ -67,12 +67,8 @@ namespace Assets.Bridge
         private void PrintJavaScriptError(JavaScriptScriptException javaScriptScriptException)
         {
             Native.JsConvertValueToString(javaScriptScriptException.Error, out var stringValue);
-
-            IntPtr resultPtr;
-            UIntPtr stringLength;
-            Native.JsStringToPointer(stringValue, out resultPtr, out stringLength);
-
-            string resultString = Marshal.PtrToStringUni(resultPtr);
+            Native.JsStringToPointer(stringValue, out var resultPtr, out _);
+            var resultString = Marshal.PtrToStringUni(resultPtr);
 
             Debug.LogError(resultString);
         }

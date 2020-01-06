@@ -7,7 +7,7 @@ namespace Assets.Bridge.Styles
 {
     public static class StyleMapper
     {
-        public static void AssignStyleProps(BirdgePayload.BridgeMessage.ComponentStyle style, VisualElement element)
+        public static void AssignStyleProps(BridgePayload.BridgeMessage.ComponentStyle style, VisualElement element)
         {
             if (!string.IsNullOrWhiteSpace(style.backgroundColor))
                 element.style.backgroundColor = ParseStyleColor(style.backgroundColor);

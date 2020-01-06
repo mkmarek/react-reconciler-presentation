@@ -5,7 +5,7 @@ namespace Assets.Bridge.Components
 {
     public class ReactRepeatButtonElement : RepeatButton, IReactElement
     {
-        public ReactRepeatButtonElement(BirdgePayload.BridgeMessage.ComponentProps props)
+        public ReactRepeatButtonElement(BridgePayload.BridgeMessage.ComponentProps props)
         {
             if (props != null)
             {
@@ -13,7 +13,7 @@ namespace Assets.Bridge.Components
             }
         }
 
-        public void UpdateProps(BirdgePayload.BridgeMessage.ComponentProps props)
+        public void UpdateProps(BridgePayload.BridgeMessage.ComponentProps props)
         {
             if (props.style != null)
             {

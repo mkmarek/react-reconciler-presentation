@@ -5,7 +5,7 @@ namespace Assets.Bridge.Components
 {
     public class ReactFoldoutElement : Foldout, IReactElement
     {
-        public ReactFoldoutElement(BirdgePayload.BridgeMessage.ComponentProps props)
+        public ReactFoldoutElement(BridgePayload.BridgeMessage.ComponentProps props)
         {
             if (props != null)
             {
@@ -13,7 +13,7 @@ namespace Assets.Bridge.Components
             }
         }
 
-        public void UpdateProps(BirdgePayload.BridgeMessage.ComponentProps props)
+        public void UpdateProps(BridgePayload.BridgeMessage.ComponentProps props)
         {
             if (props.style != null)
             {
@@ -21,6 +21,12 @@ namespace Assets.Bridge.Components
             }
 
             text = props.text;
+
+            if (!string.IsNullOrWhiteSpace(props.value))
+            {
+                bool.TryParse(props.value, out var tmpValue);
+                value = tmpValue;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Assets.Bridge.Components
     {
         private ReactRenderer renderer;
 
-        public ReactVisualElement(ReactRenderer renderer, BirdgePayload.BridgeMessage.ComponentProps props)
+        public ReactVisualElement(ReactRenderer renderer, BridgePayload.BridgeMessage.ComponentProps props)
         {
             this.renderer = renderer;
 
@@ -24,7 +24,7 @@ namespace Assets.Bridge.Components
             }
         }
 
-        public void UpdateProps(BirdgePayload.BridgeMessage.ComponentProps props)
+        public void UpdateProps(BridgePayload.BridgeMessage.ComponentProps props)
         {
             if (props.style != null)
             {

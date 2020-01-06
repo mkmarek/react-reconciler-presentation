@@ -34,14 +34,13 @@ namespace Assets.Bridge
             Native.JsGetUndefinedValue(out var undefinedValue);
             Native.JsNumberToInt(arguments[1], out var handle);
 
-            if (timers.ContainsKey(handle))
-            {
-                var timer = timers[handle];
-                timers.Remove(handle);
+            if (!timers.ContainsKey(handle)) return undefinedValue;
 
-                timer.Stop();
-                timer.Dispose();
-            }
+            var timer = timers[handle];
+            timers.Remove(handle);
+
+            timer.Stop();
+            timer.Dispose();
 
             return undefinedValue;
         }
@@ -104,12 +103,9 @@ namespace Assets.Bridge
             for (var i = 1; i < argumentcount; i++)
             {
                 Native.JsConvertValueToString(arguments[i], out var stringValue);
+                Native.JsStringToPointer(stringValue, out var resultPtr, out _);
 
-                IntPtr resultPtr;
-                UIntPtr stringLength;
-                Native.JsStringToPointer(stringValue, out resultPtr, out stringLength);
-
-                string resultString = Marshal.PtrToStringUni(resultPtr);
+                var resultString = Marshal.PtrToStringUni(resultPtr);
 
                 Debug.Log(resultString);
             }
@@ -122,20 +118,16 @@ namespace Assets.Bridge
         {
             Native.JsGetUndefinedValue(out var undefinedValue);
 
-            if (argumentcount > 0)
-            {
-                Native.JsConvertValueToString(arguments[1], out var stringValue);
+            if (argumentcount <= 0) return undefinedValue;
 
-                IntPtr resultPtr;
-                UIntPtr stringLength;
-                Native.JsStringToPointer(stringValue, out resultPtr, out stringLength);
+            Native.JsConvertValueToString(arguments[1], out var stringValue);
+            Native.JsStringToPointer(stringValue, out var resultPtr, out _);
 
-                string resultString = Marshal.PtrToStringUni(resultPtr);
+            var resultString = Marshal.PtrToStringUni(resultPtr);
 
-                ReactRenderer.Current.messagesToHandle.Enqueue(resultString);
+            ReactRenderer.Current.messagesToHandle.Enqueue(resultString);
 
-                //Debug.Log(resultString);
-            }
+            //Debug.Log(resultString);
 
             return undefinedValue;
         }

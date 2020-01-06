@@ -3,7 +3,7 @@
 namespace Assets.Bridge
 {
     [Serializable]
-    public class BirdgePayload
+    public class BridgePayload
     {
         public BridgeMessage[] messages;
 
@@ -29,7 +29,7 @@ namespace Assets.Bridge
             {
                 public ComponentStyle style;
                 public string text;
-                public string onClick;
+                public string value;
             }
 
             [Serializable]

@@ -43,7 +43,7 @@ namespace Assets.Bridge
             var sw = new System.Diagnostics.Stopwatch();
             sw.Start();
 
-            var payload = JsonUtility.FromJson<BirdgePayload>(message);
+            var payload = JsonUtility.FromJson<BridgePayload>(message);
             var temporaryComponentStorage = new Dictionary<string, VisualElement>();
 
             foreach (var deserialized in payload.messages)
@@ -122,7 +122,7 @@ namespace Assets.Bridge
             Debug.Log($"Elapsed: {sw.ElapsedMilliseconds}");
         }
 
-        private VisualElement CreateElement(BirdgePayload.BridgeMessage deserialized)
+        private VisualElement CreateElement(BridgePayload.BridgeMessage deserialized)
         {
             switch (deserialized.type)
             {
