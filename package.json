@@ -9,11 +9,16 @@
     "piano:build-1": "babel-node piano/demo/demo1.js",
     "piano:build-2": "babel-node piano/demo/demo2.js",
     "piano:build-3": "babel-node piano/demo/demo3.js",
+    "piano:build-4": "babel-node piano/demo/demo4.js",
+    "piano:build-5": "babel-node piano/demo/demo5.js",
+    "piano:build-6": "babel-node piano/demo/demo6.js",
+    "piano:build-7": "babel-node piano/demo/demo7.js",
     "java:run": "java -jar HelloWorld.jar",
     "sdl:c": "cd react-roguelike/renderer/sdl-addon && node-gyp configure",
     "sdl:b": "cd react-roguelike/renderer/sdl-addon && node-gyp build",
     "sdl": "cd react-roguelike/renderer/sdl-addon && node-gyp configure && node-gyp build",
-    "roguelike": "babel-node react-roguelike"
+    "roguelike": "babel-node react-roguelike",
+    "basic": "parcel logging-example/index.html"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +39,7 @@
     "@babel/core": "^7.7.7",
     "@babel/node": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
+    "parcel": "^1.12.4",
     "react-dom": "^16.12.0"
   }
 }

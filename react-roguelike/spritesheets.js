@@ -6,6 +6,7 @@ const sanitize = (p) => path.relative(process.cwd(), path.join(__dirname, p))
 const Character = () => (
     <spritesheet image={sanitize('images/character.png')}>
         <sprite x={1} y={6} width={15} height={22} name="Character_Down" />
+        <sprite x={1} y={6} width={15} height={22} name="Character_Down2" />
     </spritesheet>
 );
 

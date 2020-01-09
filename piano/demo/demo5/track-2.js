@@ -1,0 +1,104 @@
+const React = require('react');
+const Track = ({ tempo }) => (
+  <track tempo={tempo} octave={0}>
+  <rest hold={3.6} />
+<note tone="D" octave={2} hold={0.9} />
+<note tone="D" octave={2} hold={0.45} />
+<note tone="D" octave={2} hold={0.45} />
+<note tone="D" octave={4} hold={0.3} />
+<note tone="D" octave={4} hold={0.3} />
+<note tone="D" octave={4} hold={0.15} />
+<note tone="E" octave={4} hold={0.149999999999999} />
+<note tone="F" octave={4} hold={0.3} />
+<note tone="F" octave={4} hold={0.300000000000001} />
+<note tone="F" octave={4} hold={0.149999999999999} />
+<note tone="A" octave={1} hold={0.15} />
+<note tone="E" octave={4} hold={0.3} />
+<note tone="E" octave={4} hold={0.45} />
+<note tone="A" octave={1} hold={0.149999999999999} />
+<note tone="D" octave={2} hold={0.300000000000001} />
+<note tone="D" octave={2} hold={0.299999999999999} />
+<note tone="A" octave={3} hold={0.15} />
+<note tone="D" octave={3} hold={0.15} />
+<note tone="D" octave={4} hold={0.300000000000001} />
+<note tone="D" octave={4} hold={0.449999999999999} />
+<note tone="A" octave={1} hold={0.15} />
+<note tone="F" octave={4} hold={0.299999999999999} />
+<note tone="F" octave={4} hold={0.450000000000001} />
+<note tone="F" octave={1} hold={0.15} />
+<note tone="C" octave={2} hold={0.299999999999999} />
+<note tone="C" octave={2} hold={0.15} />
+<note tone="A" octave={1} hold={0.300000000000001} />
+<note tone="A" octave={2} hold={0.149999999999999} />
+<note tone="D" octave={4} hold={0.600000000000001} />
+<note tone="A" octave={3} hold={0.149999999999999} />
+<note tone="D" octave={3} hold={0.15} />
+<note tone="D" octave={4} hold={0.300000000000001} />
+<note tone="D" octave={4} hold={0.449999999999999} />
+<note tone="D" octave={2} hold={0.15} />
+<note tone="G" octave={4} hold={0.300000000000001} />
+<note tone="G" octave={4} hold={0.449999999999999} />
+<note tone="A" octave={1} hold={0.15} />
+<note tone="A" octave={4} hold={0.299999999999999} />
+<note tone="A" octave={4} hold={0.450000000000001} />
+<note tone="G" octave={1} hold={0.15} />
+<note tone="D" octave={2} hold={0.299999999999999} />
+<note tone="D" octave={3} hold={0.300000000000001} />
+<note tone="D" octave={4} hold={0.15} />
+<note tone="D" octave={3} hold={0.149999999999999} />
+<note tone="F" octave={4} hold={0.300000000000001} />
+<note tone="F" octave={4} hold={0.300000000000001} />
+<note tone="G" octave={4} hold={0.300000000000001} />
+<note tone="D" octave={2} hold={0.299999999999997} />
+<note tone="D" octave={3} hold={0.300000000000001} />
+<note tone="D" octave={4} hold={0.150000000000002} />
+<note tone="D" octave={3} hold={0.149999999999999} />
+<note tone="E" octave={4} hold={0.300000000000001} />
+<note tone="E" octave={4} hold={0.449999999999999} />
+<note tone="A" octave={1} hold={0.149999999999999} />
+<note tone="E" octave={4} hold={0.600000000000001} />
+<note tone="A" octave={4} hold={0.149999999999999} />
+<note tone="A" octave={2} hold={0.150000000000002} />
+<note tone="D" octave={5} hold={0.300000000000001} />
+<note tone="D" octave={5} hold={0.299999999999997} />
+<note tone="D" octave={5} hold={0.150000000000002} />
+<note tone="E" octave={5} hold={0.149999999999999} />
+<note tone="F" octave={5} hold={0.300000000000001} />
+<note tone="F" octave={5} hold={0.300000000000001} />
+<note tone="F" octave={5} hold={0.149999999999999} />
+<note tone="A" octave={1} hold={0.150000000000002} />
+<note tone="E" octave={5} hold={0.299999999999997} />
+<note tone="E" octave={5} hold={0.450000000000003} />
+<note tone="A" octave={1} hold={0.149999999999999} />
+<note tone="D" octave={2} hold={0.300000000000001} />
+<note tone="D" octave={2} hold={0.300000000000001} />
+<note tone="A" octave={4} hold={0.149999999999999} />
+<note tone="D" octave={3} hold={0.149999999999999} />
+<note tone="D" octave={5} hold={0.300000000000001} />
+<note tone="D" octave={5} hold={0.449999999999999} />
+<note tone="A" octave={1} hold={0.150000000000002} />
+<note tone="F" octave={5} hold={0.300000000000001} />
+<note tone="F" octave={5} hold={0.449999999999999} />
+<note tone="F" octave={1} hold={0.149999999999999} />
+<note tone="C" octave={2} hold={0.300000000000001} />
+<note tone="C" octave={2} hold={0.149999999999999} />
+<note tone="A" octave={1} hold={0.300000000000001} />
+<note tone="A" octave={2} hold={0.150000000000002} />
+<note tone="D" octave={5} hold={0.599999999999998} />
+<note tone="A" octave={4} hold={0.150000000000002} />
+<note tone="D" octave={3} hold={0.149999999999999} />
+<note tone="D" octave={5} hold={0.300000000000001} />
+<note tone="D" octave={5} hold={0.449999999999999} />
+<note tone="D" octave={2} hold={0.149999999999999} />
+<note tone="G" octave={5} hold={0.300000000000001} />
+<note tone="G" octave={5} hold={0.449999999999999} />
+<note tone="A" octave={1} hold={0.150000000000002} />
+<note tone="A" octave={5} hold={0.300000000000001} />
+<note tone="A" octave={5} hold={0.449999999999999} />
+<note tone="G" octave={1} hold={0.149999999999999} />
+<note tone="D" octave={2} hold={0.25} />
+
+  </track>
+);
+
+module.exports = Track;

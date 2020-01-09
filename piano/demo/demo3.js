@@ -1,102 +1,104 @@
 const React = require('react');
 const { render } = require('../src');
 
+const CE = () => (
+    <>
+        <note tone="C" hold={1/2} octave={1} />
+        <note tone="E" hold={1/2} />
+    </>
+)
+
+const BE = () => (
+    <>
+        <note tone="B" hold={1/2} />
+        <note tone="E" hold={1/2} />
+    </>
+)
+
 const CEThreeTimes = () => (
     <>
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
+        <CE />
+        <CE />
+        <CE />
     </>
 )
 
 const CEAndDEInTheMiddle = () => (
     <>
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
-        <note tone="D" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
+        <CE />
+        <note tone="D" hold={1/2} octave={1} />
+        <note tone="E" hold={1/2} />
+        <CE />
     </>
 )
 
 const BEThreeTimes = () => (
     <>
-        <note tone="B" hold={1/4} />
-        <note tone="E" hold={1/4} />
-        <note tone="B" hold={1/4} />
-        <note tone="E" hold={1/4} />
-        <note tone="B" hold={1/4} />
-        <note tone="E" hold={1/4} />
+        <BE />
+        <BE />
+        <BE />
     </>
 )
 
 const BEAndCEInTheMiddle = () => (
     <>
-        <note tone="B" hold={1/4} />
-        <note tone="E" hold={1/4} />
-        <note tone="C" hold={1/4} octave={1} />
-        <note tone="E" hold={1/4} />
-        <note tone="B" hold={1/4} />
-        <note tone="E" hold={1/4} />
+        <BE />
+        <CE />
+        <BE />
     </>
 )
 
 const TumTudidum = () => (
     <>
-        <note tone="A" hold={1/2} />
-        <note tone="A" hold={1/8} />
-        <note tone="B" hold={1/8} />
-        <note tone="A" hold={1/2} />
-
-        <note tone="A" hold={1/8} />
-        <note tone="B" hold={1/8} />
-        <note tone="A" hold={1/2} />
-
-        <note tone="A" hold={1/8} />
-        <note tone="B" hold={1/8} />
+        <note tone="A" hold={1} />
+        <note tone="A" hold={1/4} />
+        <note tone="B" hold={1/4} />
+        <note tone="A" hold={1} />
 
         <note tone="A" hold={1/4} />
-        <note tone="G" hold={1/4} />
-        <note tone="E" hold={1/4} />
-        <note tone="D" hold={1/4} />
+        <note tone="B" hold={1/4} />
+        <note tone="A" hold={1} />
+
+        <note tone="A" hold={1/2} />
+        <note tone="B" hold={1/2} />
+
+        <note tone="A" hold={1/2} />
+        <note tone="G" hold={1/2} />
+        <note tone="E" hold={1/2} />
+        <note tone="D" hold={1/2} />
         <note tone="E" hold={1/2} />
         <rest hold={1} />
     </>
 )
 
-const Stones = () =>
-	<track tempo={4/4} octave={4}>
-		<note tone="A" hold={1/4} />
-        <note tone="B" hold={1/4} />
+const MainTrack = () => (
+    <>
+        <note tone="A" hold={1/2} />
+        <note tone="B" hold={1/2} />
         
         <CEThreeTimes />
         <CEAndDEInTheMiddle />
         <BEThreeTimes />
         <BEAndCEInTheMiddle />
         <TumTudidum />
+    </>
+);
 
-        <paralleltrack octave={4} tempo={4/4}>
-            <track octave={5} tempo={4/4}>
-                <note tone="A" hold={1/4} />
-                <note tone="B" hold={1/4} />
-                <CEThreeTimes />
-                <CEAndDEInTheMiddle />
-                <BEThreeTimes />
-                <BEAndCEInTheMiddle />
-                <TumTudidum />
+const tempo = 6 / 8 / 2;
+
+const Stones = () =>
+	<track tempo={tempo} octave={4}>
+		<MainTrack />
+
+        <paralleltrack>
+            <track octave={6} tempo={tempo}>
+                <MainTrack />
             </track>
-            <track octave={4} tempo={4/4}>
-                <note tone="A" hold={1/4} />
-                <note tone="B" hold={1/4} />
-                <CEThreeTimes />
-                <CEAndDEInTheMiddle />
-                <BEThreeTimes />
-                <BEAndCEInTheMiddle />
-                <TumTudidum />
+            <track octave={5} tempo={tempo}>
+                <MainTrack />
+            </track>
+            <track octave={4} tempo={tempo}>
+                <MainTrack />
             </track>
         </paralleltrack>
 	</track>

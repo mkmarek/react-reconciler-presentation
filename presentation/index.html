@@ -28,8 +28,29 @@
   <div class="reveal">
     <div class="slides">
       <section>
-        <h1>Messing around with React</h1>
-        <p>Presentation about react reconciler</p>
+        <section>
+          <h1>Messing around with React</h1>
+          <p>Presentation about react reconciler</p>
+        </section>
+        <section>
+          <h2>Introductions</h2>
+          <img src="images/introduction.jpg" />
+        </section>
+        <section>
+            <h1>Some notable projects</h1>
+        </section>
+        <section>
+          <img src="images/graphql.JPG" />
+        </section>
+        <section>
+          <img src="images/forex.JPG" />
+        </section>
+        <section>
+          <img src="images/game.jpg" />
+        </section>
+        <section>
+          <img src="images/telia.gif" />
+        </section>
       </section>
       <section>
         <section>
@@ -51,28 +72,80 @@ const RendererPublicAPI = {
 module.exports = RendererPublicAPI;</code></pre>
         </section>
         <section>
-          <pre><code class="hljs">const HostConfig = {
-  createInstance(type, props) {
-  },
-  appendInitialChild(parent, child) {
-  },
-  appendChild(parent, child) {
-  },
-  appendChildToContainer(target, child) {
-  }
+          <pre><code class="hljs">function createInstance(
+  type,
+  newProps,
+  rootContainerInstance,
+  currentHostContext
+) {
+  return new MyFundamentalElement();
 }</code></pre>
       </section>
+      <section>
+          <pre><code class="hljs">function createTextInstance (
+  text,
+  rootContainerInstance,
+  hostContext,
+  internalInstanceHandle,
+) {
+  // create text representation in your host
+}</code></pre>
+      </section>
+      <section>
+        <pre><code class="hljs">function appendInitialChild(parent, child) {
+          
+}
+
+function appendChild(parent, child) {
+          
+}
+
+function appendChildToContainer(parent, child) {
+          
+}</code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs">function insertBefore(
+  parentInstance, child, beforeChild) {
+
+}
+
+function insertInContainerBefore(
+  parentInstance, child, beforeChild) {
+          
+}</code></pre>
+    </section>
+    <section>
+        <pre><code class="hljs">function removeChild(parent, child) {
+          
+}
+
+function removeChildFromContainer(parent, child) {
+          
+}</code></pre>
+    </section>
         <section>
-          <h2>Share data between components</h2>
-          <pre><code class="hljs">const HostConfig = {
-  getRootHostContext: (nextRootInstance) => ({}),
-  getChildHostContext: (
-    parentContext, fiberType, rootInstance) => ({}),
+          <pre><code class="hljs">function getRootHostContext(containerInstance) {
+  let context = {
+    // This can contain any data
+    // that you want to pass down to immediate child
+  }
+  return context
 }</code></pre>
         </section>
         <section>
-            <pre><code class="hljs">const HostConfig = {
-  shouldSetTextContent: (type, props) => true (or false),
+            <pre><code class="hljs">function getChildHostContext(
+  parentContext, elementType, rootInstance) {
+  let context = {
+    // This can contain any data
+    // that you want to pass down to immediate child
+  }
+  return context
+}</code></pre>
+          </section>
+        <section>
+            <pre><code class="hljs">function shouldSetTextContent(type, props) {
+  return false;
 }</code></pre>
         </section>
         <section>
@@ -91,22 +164,69 @@ module.exports = RendererPublicAPI;</code></pre>
 }</code></pre>
         </section>
         <section>
-          <pre><code class="hljs">const HostConfig = {
-  prepareForCommit: (rootContainerInstance) => {},
-  resetAfterCommit: (rootContainerInstance) => {}
+          <pre><code class="hljs">function prepareForCommit(rootContainerInstance) {
+  // any preparation before the tree gets attached to the root
 }</code></pre>
           </section>
           <section>
-              <pre><code class="hljs">const HostConfig = {
-  finalizeInitialChildren: (instance,
-    type,
-    newProps,
-    rootContainerInstance,
-    currentHostContext) => {}
+          <pre><code class="hljs">function resetAfterCommit(rootContainerInstance) {
+  // anything that needs to be executed after the tree gets
+  // attached to the root
+}</code></pre>
+              </section>
+          <section>
+              <pre><code class="hljs">function finalizeInitialChildren(
+  instance,
+  type,
+  newProps,
+  rootContainerInstance,
+  currentHostContext
+) {
+  // return true if commitMount should be invoked;
+  // we mostly don't care about commitMount.
+  // It has its purpose in react-dom.
+
+  return false;
 }</code></pre>
         </section>
+        <section>
+            <pre><code class="hljs">function prepareUpdate (
+    instance,
+    type,
+    oldProps,
+    newProps,
+    rootContainerInstance,
+    hostContext,
+) {
+  // You need to do your own props diffing
+  // and return an object with changed props
+}</code></pre>
+      </section>
+        <section>
+            <pre><code class="hljs">function commitUpdate(
+    instance,
+    updatePayload,
+    type,
+    oldProps,
+    newProps,
+    internalInstanceHandle,
+) {
+  // here you get the result of prepareUpdate function
+  // inside the updatePayload
+  // in this funciton you do your host UI manipulation
+}</code></pre>
       </section>
       <section>
+        <a href="https://blog.atulr.com/react-custom-renderer-1/">
+          More information here
+        </a>
+      </section>
+      <section>
+         <h2>Demo time!</h2>
+         <p>npm run basic</p>
+        </section>
+      </section>
+      <!-- <section>
         <section>
             <img src="images/AST.jpg" />
         </section>
@@ -158,34 +278,51 @@ module.exports = RendererPublicAPI;</code></pre>
         <section>
           <h2>Demo time!</h2>
         </section>
-      </section>
+      </section> -->
       <section>
           <section>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/G1bRi4El0iw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </section>
-          <section>
+            <h2>Let's get musical</h2>
             <img src="images/music-sheet.JPG" />
           </section>
           <section>
+              <h2>Inspired by</h2>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/G1bRi4El0iw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </section>
+          <section>
+            <p>Track needs to have a tempo and a base octave</p>
             <pre><code class="hlsjs">const App = () =>
-  &lt;track tempo={1/2} octave={4}&gt;
+  &lt;track tempo={6 / 8 / 2} octave={4}&gt;
   &lt;/track&gt;</code></pre>
           </section>
           <section>
+            <p>Clef diagram</p>
+            <img src="images/Clef_Diagram.png" />
+            <i>From Wikipedia</i>
+          </section>
+          <section>
+            <ul style="list-style: none;">
+              <li><span style="font-size: 1.3em;">𝅝</span> - 4 beats</li>
+              <li><span style="font-size: 1.3em;">𝅗𝅥</span> - 2 beats</li>
+              <li><span style="font-size: 1.3em;">𝅘𝅥</span> - 1 beat</li>
+              <li><span style="font-size: 1.3em;">𝅘𝅥𝅮</span> - 1/2 beat</li>
+              <li><span style="font-size: 1.3em;">𝅘𝅥𝅯</span> - 1/4 beat</li>
+            </ul>
+          </section>
+          <section>
+              <p>Track can then contain notes with certain tones</p>
               <pre><code class="hlsjs">const App = () =>
-    &lt;track tempo={1/2} octave={4}&gt;
-      &lt;note tone="C" hold={1/4} /&gt;
-      &lt;note tone="C" hold={1/4} /&gt;
-      &lt;note tone="A" hold={1/2} octave={-1} /&gt;
+    &lt;track tempo={6 / 8 / 2} octave={4}&gt;
+      &lt;note tone="A" hold={1/2} /&gt;
+      &lt;note tone="B" hold={1/2} /&gt;
     &lt;/track&gt;</code></pre>
             </section>
             <section>
+                <p>Or also other tracks. Perhaps some of them can play notes in parallel</p>
               <pre><code class="hlsjs">const App = () =>
-    &lt;track tempo={1/2} octave={4}&gt;
-      &lt;note tone="C" hold={1/4} /&gt;
-      &lt;note tone="C" hold={1/4} /&gt;
-      &lt;note tone="A" hold={1/2} octave={-1} /&gt;
-      &lt;paralleltrack tempo={1/2} octave={4}&gt;
+    &lt;track tempo={6 / 8 / 2} octave={4}&gt;
+      &lt;note tone="A" hold={1/2} /&gt;
+      &lt;note tone="B" hold={1/2} /&gt;
+      &lt;paralleltrack&gt;
         ...
       &lt;/paralleltrack&gt;
     &lt;/track&gt;</code></pre>
@@ -196,23 +333,24 @@ module.exports = RendererPublicAPI;</code></pre>
       </section>
       <section>
           <section>
-            <h2>Let's get more dynamic</h2>
+            <h2>Something more dynamic?</h2>
             <p>Mutating trees</p>
           </section>
           <section>
               <img src="images/roguelike.JPG" />
           </section>
           <section>
-              <img src="images/cataclysm-dda.JPG" />
+              <img src="images/game-architecture.png" />
           </section>
           <section>
               <img src="images/sdl.jfif" />
+              <p>Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D.</p>
           </section>
           <section>
               <img src="images/nodegyp.JPG" />
           </section>
           <section>
-              <img src="images/react-icon.png" />
+              <h2>Demo time!</h2>
           </section>
         </section>
         <section>
@@ -226,18 +364,39 @@ module.exports = RendererPublicAPI;</code></pre>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/t4tfgI1XvGs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </section>
             <section>
+              <img src="images/comment.png" />
+            </section>
+            <section>
               <img src="images/unity-ui.png" />
             </section>
             <section>
+              <pre><code class="hlxml">&lt;UXML
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="UnityEngine.UIElements"
+
+  &lt;Label text="Select something to remove from your suitcase:"/&gt;
+  &lt;Box&gt;
+    &lt;Toggle name="boots" label="Boots" value="false" /&gt;
+    &lt;Toggle name="helmet" label="Helmet" value="false" /&gt;
+  &lt;/Box&gt;
+  &lt;Box&gt;
+    &lt;Button name="cancel" text="Cancel" /&gt;
+    &lt;Button name="ok" text="OK" /&gt;
+  &lt;/Box&gt;
+&lt;/UXML&gt;</code></pre>
+            </section>
+            <section>
+                <img src="images/uxml-events.jpg" />
+              </section>
+            <section>
+              <h2>First we need a JS runtime</h2>
               <img src="images/chakra.JPG" />
             </section>
             <section>
-              <p>Reconciler creates a tree in memory</p>
-              <img src="images/tree-sketch.png" />
+              <img src="images/react-unity-architecture.png" />
             </section>
             <section>
-              <p>And mirrors every operation through a native bridge to unity</p>
-              <img src="images/tree-to-unity.png" />
+              <img src="images/react-unity-architecture-ws.png" />
             </section>
             <section>
               <p>The reconciler will support:</p>

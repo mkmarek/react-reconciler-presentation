@@ -1,6 +1,6 @@
 ///<reference path="./renderer/declarations.d.ts"/>
 
-import React, { useState } from 'react';
+import React from 'react';
 import { render } from './renderer';
 import TabPanel from './components/tab-panel';
 import Counter from './components/counter';

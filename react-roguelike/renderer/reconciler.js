@@ -39,10 +39,13 @@ const SDLRenderer = Reconciler({
         child.render();
     },
     removeChild(parent, child) {
-
+        parent.removeChild(child);
     },
     removeChildFromContainer(container, child) {
-
+        container.removeChild(child);
+    },
+    insertBefore(parent, child, beforeChild) {
+        parent.insertBefore(child, beforeChild);
     },
     prepareUpdate(element, type, prevProps, newProps, rootContainer) {
         return { rootContainer, props: newProps };

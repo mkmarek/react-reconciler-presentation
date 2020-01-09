@@ -40,7 +40,7 @@ export const prepareForCommit = (containerInfo: ContainerElement) => {
 
 };
 
-export const  resetAfterCommit = (containerInfo: ContainerElement) => {
+export const resetAfterCommit = (containerInfo: ContainerElement) => {
     containerInfo.commitUpdates();
 };
 

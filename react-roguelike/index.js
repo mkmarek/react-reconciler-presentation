@@ -6,6 +6,8 @@ const Player = require('./player');
 const Map = require('./map');
 const SpriteSheets = require('./spritesheets');
 
+// const App = require('./second-map');
+
 const resolutionX = 800;
 const resolutionY = 600;
 
@@ -23,7 +25,6 @@ const App = () => {
                 width={resolutionX}
                 height={resolutionY}
                 onEvents={sendEventsToStore}>
-                <music file={`${__dirname}/../piano/demo/demo3.wav`} />
                 <SpriteSheets />
                 <Player />
                 <rendersprite x={100} y={100} name="House" />
