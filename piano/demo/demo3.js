@@ -23,7 +23,7 @@ const CEThreeTimes = () => (
     </>
 )
 
-const CEAndDEInTheMiddle = () => (
+const CETwoTimesWithDEInTheMiddle = () => (
     <>
         <CE />
         <note tone="D" hold={1/2} octave={1} />
@@ -40,7 +40,7 @@ const BEThreeTimes = () => (
     </>
 )
 
-const BEAndCEInTheMiddle = () => (
+const BETwoTimesWithCEInTheMiddle = () => (
     <>
         <BE />
         <CE />
@@ -77,18 +77,18 @@ const MainTrack = () => (
         <note tone="B" hold={1/2} />
         
         <CEThreeTimes />
-        <CEAndDEInTheMiddle />
+        <CETwoTimesWithDEInTheMiddle />
         <BEThreeTimes />
-        <BEAndCEInTheMiddle />
+        <BETwoTimesWithCEInTheMiddle />
         <TumTudidum />
     </>
 );
 
-const tempo = 6 / 8 / 2;
+const tempo = 1 / 2;
 
 const Stones = () =>
 	<track tempo={tempo} octave={4}>
-		<MainTrack />
+		{/* <MainTrack /> */}
 
         <paralleltrack>
             <track octave={6} tempo={tempo}>
